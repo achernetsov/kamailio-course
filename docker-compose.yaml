@@ -23,7 +23,9 @@ services:
       - ./kamailio-default/:/etc/kamailio
     environment:
       - KAM_SHM_MEM_SIZE=256
+      - PUBLIC_SUBNET=${PUBLIC_SUBNET}
       - PUBLIC_IP=${KAM_PUBLIC_IP}
+      - INTERNAL_SUBNET=${INTERNAL_SUBNET}
       - INTERNAL_IP=${KAM_INTERNAL_IP}
       - UDP_PORT=${KAM_UDP_PORT}
       - TLS_PORT=${KAM_TLS_PORT}
