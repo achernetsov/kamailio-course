@@ -1,5 +1,4 @@
----
-version: "3.9"
+
 services:
 
   sngrep:
@@ -40,6 +39,7 @@ services:
       - "5090:5060"
     volumes:
       - ./kamailio-default/:/etc/kamailio
+      - ./.env:/etc/env
     environment:
       - KAM_SHM_MEM_SIZE=256
       - PUBLIC_SUBNET=${PUBLIC_SUBNET}
