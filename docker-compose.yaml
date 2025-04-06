@@ -14,6 +14,25 @@ services:
     cap_add:
       - NET_ADMIN
 
+  db:
+    image: mysql:5.7
+    # restart: always
+    container_name: db01
+    environment:
+      MYSQL_DATABASE: 'kamailio'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'ro_password'
+      MYSQL_ROOT_PASSWORD: 'rw_password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      internal:
+        ipv4_address: ${DB_INTERNAL_IP}
+
   kamailio-edge:
     image: kamailio/kamailio-ci:5.4-alpine.debug
     container_name: kamailio-edge
@@ -80,7 +99,6 @@ services:
     networks:
       external:
         ipv4_address: 192.168.254.101
-
 
 networks:
     external:
