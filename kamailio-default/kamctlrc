@@ -27,16 +27,16 @@ DBHOST=$DB_INTERNAL_IP
 DBPORT=3306
 
 ## database name (for ORACLE this is TNS name)
-DBNAME=kamailio
+DBNAME=$KAM_DB_NAME
 
 ## database path used by dbtext, db_berkeley or sqlite
 # DB_PATH="/usr/local/etc/kamailio/dbtext"
 
 ## database read/write user
-DBRWUSER="kamailio"
+DBRWUSER=$KAM_DB_RW_USER
 
 ## password for database read/write user
-DBRWPW="kamailiorw"
+DBRWPW=$KAM_DB_RW_PASS
 
 ## database read only user
 DBROUSER="kamailioro"

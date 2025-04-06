@@ -18,7 +18,7 @@ services:
     # restart: always
     container_name: db01
     environment:
-      MYSQL_DATABASE: 'kamailio'
+      MYSQL_DATABASE: ${KAM_DB_NAME} # does not matter - will be overriden by kamdbctl on reinit
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'ro_password'
       MYSQL_ROOT_PASSWORD: 'rw_password'
@@ -48,6 +48,10 @@ services:
       - INTERNAL_IP=${KAM_INTERNAL_IP}
       - UDP_PORT=${KAM_UDP_PORT}
       - TLS_PORT=${KAM_TLS_PORT}
+      - DBHOST=${DB_INTERNAL_IP}
+      - DBNAME=${KAM_DB_NAME}
+      - DBUSER=${KAM_DB_RW_USER}
+      - DBPASS=${KAM_DB_RW_PASS}
     networks:
       external:
         ipv4_address: ${KAM_PUBLIC_IP}
