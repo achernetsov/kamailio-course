@@ -32,6 +32,21 @@ services:
       internal:
         ipv4_address: ${DB_INTERNAL_IP}
 
+  rtpengine-edge:
+    build:
+      context: ./rtpengine-edge/docker
+      dockerfile: Dockerfile
+    container_name: rtpengine-edge
+    ports:
+      - "23000-23100:23000-23100"
+    volumes:
+      - ./rtpengine-edge/config:/etc/rtpengine
+    networks:
+      external:
+        ipv4_address: 192.168.254.3
+      internal:
+        ipv4_address: 172.16.254.3
+
   kamailio-edge:
     image: kamailio/kamailio-ci:5.4-alpine.debug
     container_name: kamailio-edge
