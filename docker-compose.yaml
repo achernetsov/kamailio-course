@@ -41,6 +41,8 @@ services:
       - "23000-23100:23000-23100"
     volumes:
       - ./rtpengine-edge/config:/etc/rtpengine
+    depends_on:
+      - db
     networks:
       external:
         ipv4_address: 192.168.254.3
@@ -67,6 +69,8 @@ services:
       - DBNAME=${KAM_DB_NAME}
       - DBUSER=${KAM_DB_RW_USER}
       - DBPASS=${KAM_DB_RW_PASS}
+    depends_on:
+      - db
     networks:
       external:
         ipv4_address: ${KAM_PUBLIC_IP}
@@ -78,7 +82,7 @@ services:
     container_name: b2bua_internal_01 
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp --auto-answer=404 --outbound sip:${KAM_INTERNAL_IP};lr
+    command: pjsua --null-audio --no-tcp --auto-answer=404 --outbound sip:${KAM_INTERNAL_IP};lr  --id sip:int1@sip3.archertech.ru
     ports:
       - "5091:5060"
     networks:
@@ -90,7 +94,7 @@ services:
     container_name: b2bua_internal_02 
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp --auto-answer=200
+    command: pjsua --null-audio --no-tcp --auto-answer=200 --id sip:int2@sip3.archertech.ru
     ports:
       - "5092:5060"
     networks:
