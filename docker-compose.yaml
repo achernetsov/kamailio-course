@@ -102,7 +102,9 @@ services:
     container_name: b2bua_external_01
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp  --outbound sip:${KAM_PUBLIC_IP};lr
+    command: pjsua --config-file=/config/pjsua.cfg
+    volumes:
+      - ./b2bua/external_01:/config
     ports:
       - "5093:5060"
     networks:
