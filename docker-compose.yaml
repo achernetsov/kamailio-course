@@ -82,7 +82,9 @@ services:
     container_name: b2bua_internal_01 
     stdin_open: true
     image: andrius/pjsua:latest
-    command: pjsua --null-audio --no-tcp --auto-answer=404 --outbound sip:${KAM_INTERNAL_IP};lr  --id sip:int1@sip3.archertech.ru
+    command: pjsua --config-file=/config/pjsua.cfg
+    volumes:
+      - ./b2bua/internal_01:/config
     ports:
       - "5091:5060"
     networks:
